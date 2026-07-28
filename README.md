@@ -37,26 +37,27 @@ Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
 Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-> 
-> # Características de cada coluna:
-> # mpg  -> Consumo de combustível (milhas por galão)
-> # cyl  -> Número de cilindros do motor
-> # disp -> Cilindrada do motor
-> # hp   -> Potência do motor (Horse Power)
-> # drat -> Relação do eixo traseiro
-> # wt   -> Peso do veículo (milhares de libras)
-> # qsec -> Tempo para percorrer 1/4 de milha (segundos)
-> # vs   -> Tipo do motor (0 = V, 1 = em linha)
-> # am   -> Tipo de transmissão (0 = automática, 1 = manual)
-> # gear -> Número de marchas
-> # carb -> Número de carburadores
-> 
-> 
-> # Estrutura da base
-> # Quantidade de observações;
-> # Quantidade de variáveis;
-> # Tipo de cada variável.
-> str(mtcars)
+
+ # Características de cada coluna:
+ # mpg  -> Consumo de combustível (milhas por galão)
+ # cyl  -> Número de cilindros do motor
+ # disp -> Cilindrada do motor
+ # hp   -> Potência do motor (Horse Power)
+ # drat -> Relação do eixo traseiro
+ # wt   -> Peso do veículo (milhares de libras)
+ # qsec -> Tempo para percorrer 1/4 de milha (segundos)
+ # vs   -> Tipo do motor (0 = V, 1 = em linha)
+ # am   -> Tipo de transmissão (0 = automática, 1 = manual)
+ # gear -> Número de marchas
+ # carb -> Número de carburadores
+ 
+ 
+ # Estrutura da base
+ # Quantidade de observações;
+ # Quantidade de variáveis;
+ # Tipo de cada variável.
+
+ str(mtcars)
 'data.frame':	32 obs. of  11 variables:
  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
@@ -69,32 +70,33 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
-> #Escolhemos a variável cyl para formar os estratos porque ela divide naturalmente a população em três grupos distintos: 11 veículos com 4 cilindros, 7 com 6 cilindros e 14 com 8 cilindros. A partir dessa divisão, realizaremos a Amostragem Estratificada e compararemos seus resultados com a Amostragem Aleatória Simples.
-> 
-> 
-> 
-> table(mtcars$cyl)
+
+ #Escolhemos a variável cyl para formar os estratos porque ela divide naturalmente a população em três grupos distintos: 11 veículos com 4 cilindros, 7 com 6 cilindros e 14 com 8 cilindros. A partir dessa divisão, realizaremos a Amostragem Estratificada e compararemos seus resultados com a Amostragem Aleatória Simples.
+ 
+
+ table(mtcars$cyl)
 
  4  6  8 
 11  7 14 
-> variaveis <- data.frame(
-+     Variavel = c("mpg","cyl","disp","hp","drat","wt","qsec","vs","am","gear","carb"),
-+     Descricao = c(
-+         "Consumo",
-+         "Nº de cilindros",
-+         "Cilindrada",
-+         "Potência",
-+         "Relação do eixo",
-+         "Peso",
-+         "Tempo 1/4 de milha",
-+         "Tipo do motor",
-+         "Transmissão",
-+         "Nº de marchas",
-+         "Nº de carburadores"
-+     )
-+ )
-> 
-> variaveis
+
+ variaveis <- data.frame(
+     Variavel = c("mpg","cyl","disp","hp","drat","wt","qsec","vs","am","gear","carb"),
+     Descricao = c(
+         "Consumo",
+         "Nº de cilindros",
+         "Cilindrada",
+         "Potência",
+         "Relação do eixo",
+         "Peso",
+         "Tempo 1/4 de milha",
+         "Tipo do motor",
+         "Transmissão",
+         "Nº de marchas",
+         "Nº de carburadores"
+     )
+ )
+ 
+ variaveis
    Variavel          Descricao
 1       mpg            Consumo
 2       cyl    Nº de cilindros
@@ -107,36 +109,36 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 9        am        Transmissão
 10     gear      Nº de marchas
 11     carb Nº de carburadores
-> View(variaveis)
-> 
-> 
-> # Separando os veículos por número de cilindros
-> estrato4 <- subset(mtcars, cyl == 4)
-> 
-> estrato6 <- subset(mtcars, cyl == 6)
-> 
-> estrato8 <- subset(mtcars, cyl == 8)
-> View(estrato4)
-> View(estrato4)
-> 
-> 
-> # A função subset() cria subconjuntos da base.
-> 
-> # cyl == 4 → seleciona apenas veículos de 4 cilindros.
-> # cyl == 6 → seleciona apenas veículos de 6 cilindros.
-> # cyl == 8 → seleciona apenas veículos de 8 cilindros.
-> 
-> # Ao final dessa etapa, a população está dividida em três estratos.
-> 
-> 
-> # Reprodutibilidade do sorteio
-> 
-> set.seed(123)
-> 
-> # Sorteio dentro de cada estrato
-> 
-> amostra4 <- estrato4[sample(nrow(estrato4), 5), ]
-> 
+ View(variaveis)
+ 
+ 
+ # Separando os veículos por número de cilindros
+ estrato4 <- subset(mtcars, cyl == 4)
+ 
+ estrato6 <- subset(mtcars, cyl == 6)
+ 
+ estrato8 <- subset(mtcars, cyl == 8)
+ View(estrato4)
+ View(estrato4)
+ 
+ 
+ # A função subset() cria subconjuntos da base.
+ 
+ # cyl == 4 → seleciona apenas veículos de 4 cilindros.
+ # cyl == 6 → seleciona apenas veículos de 6 cilindros.
+ # cyl == 8 → seleciona apenas veículos de 8 cilindros.
+ 
+ # Ao final dessa etapa, a população está dividida em três estratos.
+ 
+ 
+ # Reprodutibilidade do sorteio
+ 
+ set.seed(123)
+ 
+ # Sorteio dentro de cada estrato
+ 
+ amostra4 <- estrato4[sample(nrow(estrato4), 5), ]
+ 
 > amostra6 <- estrato6[sample(nrow(estrato6), 3), ]
 > 
 > amostra8 <- estrato8[sample(nrow(estrato8), 6), ]
