@@ -5,7 +5,6 @@
 
 > mtcars
                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-# Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
 Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
 Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
@@ -135,23 +134,10 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
  
  set.seed(123)
  
- # Sorteio dentro de cada estrato
+ # Sorteio dentro de cada estrato, garantindo que nenhum carro tenha preferência de escolha
  
- amostra4 <- estrato4[sample(nrow(estrato4), 5), ]
+>amostra4 <- estrato4[sample(nrow(estrato4), 5), ]
  
-> amostra6 <- estrato6[sample(nrow(estrato6), 3), ]
-> 
-> amostra8 <- estrato8[sample(nrow(estrato8), 6), ]
-> 
-> 
-> # Reprodutibilidade do sorteio
-> 
-> set.seed(123)
-> 
-> # Sorteio dentro de cada estrato
-> 
-> amostra4 <- estrato4[sample(nrow(estrato4), 5), ]
-> 
 > amostra6 <- estrato6[sample(nrow(estrato6), 3), ]
 > 
 > amostra8 <- estrato8[sample(nrow(estrato8), 6), ]
@@ -236,7 +222,7 @@ Maserati Bora    15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 > 
 > #Quanto maior a variância, mais diferentes são os veículos daquele estrato.
 > 
-> # Resumo da potência por estrato
+> # Resumo da potência de cada modelo de carro pela variável de cilindros por estrato
 > 
 > by(mtcars$hp, mtcars$cyl, summary)
 mtcars$cyl: 4
